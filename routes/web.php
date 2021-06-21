@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// route Login
+Route::get('/', [UserController::class,'index'])->name('login');
+Route::post('/',[UserController::class,'loginAct'])->name('login-act');

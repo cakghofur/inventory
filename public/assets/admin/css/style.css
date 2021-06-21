@@ -1,0 +1,23 @@
+@media only screen and (max-width: 720px) {
+    .logo {
+        margin: 0px 30px;
+    }
+    .nama_company {
+        color: white;
+    }
+}
+
+@media print {
+    #sidenav-main,
+    #tombolCetak,
+    #navbar-main,
+    #card-footer,
+    .modal,
+    .footer,
+    .btn {
+        display: none;
+    }
+    body {
+        margin: auto 0.7;
+    }
+}
