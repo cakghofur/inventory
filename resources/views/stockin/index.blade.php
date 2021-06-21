@@ -61,8 +61,7 @@
                                                 method="POST" class="d-inline">
                                                 @method('DELETE')
                                                 @csrf
-                                                <button type="submit" class="btn btn-secondary btn-sm text-danger"><i
-                                                        class="ni ni-fat-remove fa-2x"></i></button>
+                                                <button type="submit" class="btn btn-secondary btn-sm text-danger"><i class="ni ni-fat-remove fa-2x"></i></button>
                                             </form>
                                             |
                                             <a href="{{ route('stockin.edit', ['stockin'=>$row['id']]) }}" class="btn btn-secondary btn-sm text-warning"><i class="fas fa-edit fa-2x"></i></a>
@@ -78,6 +77,7 @@
             </div>
         </div>
     </div>
+
 
 
 @endsection

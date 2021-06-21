@@ -8,11 +8,6 @@ use Intervention\Image\Facades\Image;
 
 class StockInController extends Controller
 {
-    private $stockIn;
-    public function __construct()
-    {
-        $this->stockIn=new StockIn();
-    }
     /**
      * Display a listing of the resource.
      *
@@ -76,7 +71,7 @@ class StockInController extends Controller
         }else{
             $request->validate(['gambar' => 'image|mimes:jpg,png,jpeg'], ['gambar.image' => 'Harus tipe gambar']);
             $destinationPath = public_path('assets/gambar/stockIn');
-            $namaGambar =  $kode_barang. '.' . $file->getClientOriginalExtension();
+            $namaGambar =  $kode_barang.'-'.time(). '.' . $file->getClientOriginalExtension();
             $img = Image::make($file->path());
             $img->resize(200, 200, function ($constraint) {
                 $constraint->aspectRatio();
@@ -105,9 +100,14 @@ class StockInController extends Controller
      * @param  \App\Models\StockIn  $stockIn
      * @return \Illuminate\Http\Response
      */
-    public function edit(StockIn $stockIn)
+    public function edit($id)
     {
-        //
+        $data=[
+            'title'=>'Edit Barang',
+            'var'=>'stockin',
+            'row'=>StockIn::where('id',$id)->first(),
+        ];
+        return view('stockin.edit',$data);
     }
 
     /**
@@ -117,9 +117,57 @@ class StockInController extends Controller
      * @param  \App\Models\StockIn  $stockIn
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StockIn $stockIn)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            [
+                'kode_brg'=>'required',
+                'nama_brg'=>'required',
+                'tanggal_masuk'=>'required|date|date_format:Y-m-d',
+                'jumlah'=>'required',
+            ],
+            [
+                'kode_brg.required'=>'Kode barang tidak boleh kosong',
+                'nama_brg.required'=>'Nama barang tidak boleh kosong',
+                'tanggal_masuk.required'=>'Tanggal masuk tidak boleh kosong',
+                'tanggal_masuk.date_format'=>'Tanggal tidak sesuai',
+                'jumlah.required'=>'Jumlah tidak boleh kosong',
+
+            ]
+            );
+        $cek=StockIn::where('id',$id)->first();
+        $file=$request->file('gambar');
+        $kode_barang=$request->kode_brg;
+        if(!$file)
+        {
+            $namaGambar=$cek['gambar'];
+        }else{
+            $request->validate(['gambar' => 'image|mimes:jpg,png,jpeg'], ['gambar.image' => 'Harus tipe gambar']);
+            $destinationPath = public_path('assets/gambar/stockIn');
+            $namaGambar =  $kode_barang.'-'.time(). '.' . $file->getClientOriginalExtension();
+            $img = Image::make($file->path());
+            $img->resize(200, 200, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $namaGambar);
+            if ($cek['gambar'] != 'default.png') {
+                unlink(public_path('assets/gambar/stockIn') . '/' . $cek['gambar']);
+            }
+        }
+        $update=StockIn::where('id',$id)->update([
+            'kode_brg'=>$kode_barang,
+            'nama_brg'=>$request->nama_brg,
+            'tanggal_masuk'=>date('Y-m-d',strtotime($request->tanggal_masuk)),
+            'jumlah'=>$request->jumlah,
+            'gambar'=>$namaGambar,
+            'keterangan'=>$request->keterangan
+        ]);
+        if($update)
+        {
+            return redirect()->route('stockin.index')->with('pesan-berhasil','Barang berhasil diubah');
+        }else{
+            return redirect()->route('stockin.index')->with('pesan-gagal','Barang gagal diubah');
+
+        }
     }
 
     /**
@@ -128,14 +176,13 @@ class StockInController extends Controller
      * @param  \App\Models\StockIn  $stockIn
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StockIn $stockIn)
+    public function destroy($id)
     {
-        $cek=StockIn::where('id',$stockIn->id)->first();
-        $delete=StockIn::where('id',$stockIn->id)->delete();
+        $cek=StockIn::where('id',$id)->first();
+        $delete=StockIn::where('id',$id)->delete();
         if($delete)
         {
-            if (!$cek['gambar'] == 'default.png') {
-
+            if ($cek['gambar'] != 'default.png') {
                 unlink(public_path('assets/gambar/stockIn/' . $cek['gambar']));
             }
             return redirect()->route('stockin.index')->with('pesan-berhasil','Barang berhasil dihapus');

@@ -12,5 +12,4 @@ class StockIn extends Model
     protected $fillable=['kode_brg','nama_brg','tanggal_masuk','jumlah','gambar','keterangan'];
 
 
-
 }
