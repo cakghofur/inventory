@@ -31,6 +31,7 @@
                         </div>
 
                     @endif
+                    <a href="{{route('stockin.create')}}" class="btn btn-success mb-4">Input Barang</a>
                     <div class="table-responsive">
                         <table class="table table-hover text-center table-flush display nowrap" id="stockIn"
                             style="width:100%">
@@ -50,19 +51,21 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $row['kode_brg'] }}</td>
                                         <td>{{ $row['nama_brg'] }}</td>
-                                        <td>{{ date('G:i', strtotime($row['tanggal_masuk'])) }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($row['tanggal_masuk'])) }}</td>
                                         <td>{{ $row['jumlah'] }}</td>
                                         <td><img src="{{ asset('assets/gambar') }}/stockIn/{{ $row['gambar'] }}"
                                                 alt="StockIn Gambar"></td>
                                         <td>{{ $row['keterangan'] }}</td>
                                         <td>
-                                            <form action="{{ route('stockin.destroy', ['id' => $row['id']]) }}"
+                                            <form action="{{ route('stockin.destroy', ['stockin' => $row['id']]) }}"
                                                 method="POST" class="d-inline">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit" class="btn btn-secondary btn-sm text-danger"><i
                                                         class="ni ni-fat-remove fa-2x"></i></button>
                                             </form>
+                                            |
+                                            <a href="{{ route('stockin.edit', ['stockin'=>$row['id']]) }}" class="btn btn-secondary btn-sm text-warning"><i class="fas fa-edit fa-2x"></i></a>
 
                                         </td>
                                     </tr>

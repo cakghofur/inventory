@@ -8,7 +8,7 @@
         Stock Barang - {{ $title }}
     </title>
     <!-- Favicon -->
-    <link href="{{ asset('assets/user') }}/src/images/favicon tt.png" rel="icon" type="image/png">
+    <link href="{{ asset('assets/admin') }}/img/logo/favicon tt.png" rel="icon" type="image/png">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <!-- Icons -->
@@ -44,7 +44,7 @@
             </button>
             <!-- Brand -->
             <a class="navbar-brand pt-0" href="{{ route('dashboard') }}">
-                <img src="{{ asset('assets/user/src/images') }}/teropong timur2.png"
+                <img src="{{ asset('assets/admin/img/logo') }}/teropong timur2.png"
                     class="navbar-brand-img img-responsive logo" alt="...">
             </a>
 
@@ -88,7 +88,7 @@
                     <div class="row">
                         <div class="col-6 collapse-brand">
                             <a href="{{ route('dashboard') }}">
-                                <img src="{{ asset('assets/user/src/images') }}/teropong timur2.png">
+                                <img src="{{ asset('assets/admin/img/logo') }}/teropong timur2.png">
                             </a>
                         </div>
                         <div class="col-6 collapse-close">
@@ -217,7 +217,7 @@
             </div>
         </div>
         <!-- Header -->
-        <div class="header bg-gradient-primary pb-6 mb-4">
+        <div class="header bg-gradient-teal pb-6 mb-4">
 
         </div>
         <!-- Page content -->
@@ -229,7 +229,7 @@
                 <div class="row align-items-center justify-content-lg-between">
                     <div class="col-lg-6">
                         <div class="copyright text-center  text-lg-left  text-muted">
-                            &copy; 2020 <span class="font-weight-bold ml-1 text-primary">Cak Ghofur</span>
+                            &copy; {{date('Y')}} <span class="font-weight-bold ml-1 text-info">JRegex</span>
                         </div>
                     </div>
 

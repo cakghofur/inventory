@@ -19,11 +19,13 @@ use Illuminate\Support\Facades\Route;
 // route Login
 Route::get('/', [UserController::class,'index'])->name('login');
 Route::post('/',[UserController::class,'loginAct'])->name('login-act');
-Route::get('logout/',[UserController::class, 'logout'])->name('logout');
+Route::get('logout/',[UserController::class, 'logout'])->name('logout')->middleware('cek-admin');
 
 
 // Dashboard
 Route::get('dashboard/',[DashboardController::class,'index'])->name('dashboard')->middleware('cek-admin');
 
 // Stock In
-Route::resource('stockin',StockInController::class)->middleware('cek-admin');
+Route::resource('stockin',StockInController::class)->middleware('cek-admin')->except(['show']);
+
+// Stock Out
