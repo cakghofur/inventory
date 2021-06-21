@@ -41,7 +41,9 @@ class UserController extends Controller
             $password=sha1($request->password);
             if($password==$cek['password'])
             {
-                return "Selamat Datang";
+                User::where('id',$cek['id'])->update(['login_time'=>now()]);
+                $request->session()->put('akun-admin',$cek);
+                return redirect('dashboard/');
 
             }else{
                 return redirect()->back()->with('message','Password Salah!!');
@@ -49,6 +51,13 @@ class UserController extends Controller
         }else{
             return redirect()->back()->with('message','User Tidak ada');
         }
+
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget('akun-admin');
+        return redirect()->route('login');
 
     }
 }

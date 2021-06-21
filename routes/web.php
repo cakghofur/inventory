@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 // route Login
 Route::get('/', [UserController::class,'index'])->name('login');
 Route::post('/',[UserController::class,'loginAct'])->name('login-act');
+Route::get('logout/',[UserController::class, 'logout'])->name('logout');
+
+
+// Dashboard
+Route::get('dashboard/',[DashboardController::class,'index'])->name('dashboard')->middleware('cek-admin');
