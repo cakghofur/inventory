@@ -113,13 +113,13 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ $var == 'stockin' ? 'active' : '' }}"
-                            href="#"> <i class="ni ni-shop fa-fw text-primary"></i> Barang Masuk
+                            href="{{ route('stockin.index') }}"> <i class="ni ni-collection fa-fw text-primary"></i> Barang Masuk
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ $var == 'stockout' ? 'active' : '' }}"
                             href="#"> <i
-                                class="fas fa-ruler-combined fa-fw text-primary"></i> Barang Keluar
+                                class="ni ni-collection fa-fw text-primary"></i> Barang Keluar
                         </a>
                     </li>
                 </ul>
