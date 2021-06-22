@@ -80,7 +80,7 @@ $(document).ready(function () {
         },
     });
 
-    $("#table-produk").dataTable({
+    $("#stock-keluar").dataTable({
         paging: true,
         language: {
             oPaginate: {
@@ -104,5 +104,45 @@ $(document).ready(function () {
                 }),
             },
         },
+    });
+
+    $("#table-user").dataTable({
+        paging: true,
+        language: {
+            oPaginate: {
+                sNext: '<i class="ni ni-bold-right"></i>',
+                sPrevious: '<i class="ni ni-bold-left"></i>',
+                sFirst: '<i class="fa fa-step-backward"></i>',
+                sLast: '<i class="fa fa-step-forward"></i>',
+            },
+        },
+        columnDefs: [{ searchable: false, targets: [0] }],
+        responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.modal({
+                    header: function (row) {
+                        var data = row.data();
+                        return "Details Untuk " + data[1];
+                    },
+                }),
+                renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+                    tableClass: "table table-responsive",
+                }),
+            },
+        },
+    });
+
+    $("#btnEdit").click(function () {
+        $("#nama").removeAttr("disabled");
+        $("#email").removeAttr("disabled");
+        $("#username").removeAttr("disabled");
+        $("#gambar").removeAttr("disabled");
+        $(this).removeClass("btn-primary");
+        $(this).addClass("btn-secondary");
+        $("#btnUpdate").removeClass("btn-secondary");
+        $("#btnUpdate").addClass("btn-primary");
+        $(this).addClass("disabled");
+        $("#btnUpdate").removeAttr("disabled");
+        $(".custom-file-label").removeClass("disabled");
     });
 });

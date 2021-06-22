@@ -64,12 +64,12 @@
                         <div class=" dropdown-header noti-title">
                             <h6 class="text-overflow m-0">Welcome!</h6>
                         </div>
-                        <a href="#" class="dropdown-item">
+                        <a href="{{ route('user.profile') }}" class="dropdown-item">
                             <i class="fas fa-user fa-fw"></i>
                             <span>Profile</span>
                         </a>
 
-                        <a href="#" class="dropdown-item">
+                        <a href="{{ route('user.changePassword') }}" class="dropdown-item">
                             <i class="fas fa-lock fa-fw"></i>
                             <span>Ganti Password</span>
                         </a>
@@ -118,7 +118,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ $var == 'stockout' ? 'active' : '' }}"
-                            href="#"> <i
+                            href="{{ url('stockout') }}"> <i
                                 class="ni ni-collection fa-fw text-primary"></i> Barang Keluar
                         </a>
                     </li>
@@ -133,8 +133,8 @@
                     <ul class="navbar-nav mb-md-3">
 
                         <li class="nav-item">
-                            <a class="nav-link {{ $title == 'Users' ? 'active' : '' }}"
-                                href="#">
+                            <a class="nav-link {{ $var == 'user' ? 'active' : '' }}"
+                                href="{{ route('user.list') }}">
                                 <i class="ni ni-circle-08 fa-fw text-primary"></i>
                                 <span class="nav-link-text">Users</span>
                             </a>
@@ -174,12 +174,12 @@
                             <div class=" dropdown-header noti-title">
                                 <h6 class="text-overflow m-0">Welcome!</h6>
                             </div>
-                            <a href="#" class="dropdown-item">
+                            <a href="{{ route('user.profile') }}" class="dropdown-item">
                                 <i class="fas fa-user fa-fw text-primary"></i>
                                 <span>Profile</span>
                             </a>
 
-                            <a href="#" class="dropdown-item">
+                            <a href="{{ route('user.changePassword') }}" class="dropdown-item">
                                 <i class="fas fa-lock fa-fw text-primary"></i>
                                 <span>Ganti Password</span>
                             </a>
@@ -218,6 +218,7 @@
         </div>
         <!-- Header -->
         <div class="header bg-gradient-teal pb-6 mb-4">
+
 
         </div>
         <!-- Page content -->

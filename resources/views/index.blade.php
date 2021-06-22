@@ -8,7 +8,7 @@
     <meta name="author" content="Creative Tim">
     <title>Stock Barang - {{ $title }}</title>
     <!-- Favicon -->
-    <link href="{{ asset('assets/user') }}/src/images/favicon tt.png" rel="icon" type="image/png">
+    <link href="{{ asset('assets/admin') }}/img/logo/favicon tt.png" rel="icon" type="image/png">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <!-- Icons -->

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class cekLogin
+class cekRole
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,10 @@ class cekLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->session()->has('akun-admin')) {
-            return redirect()->route('dashboard');
-        } else {
+        if($request->session()->get('akun-admin.role_id')==2)
+        {
+            return redirect()->route('user.profile');
+        }else{
             return $next($request);
         }
     }

@@ -9,10 +9,13 @@
                     <div class="row align-items-center">
 
                         <div class="col">
-                            <h1>{{$title}}</h1>
+                            <h1>Daftar User</h1>
 
                         </div>
-                    </div>
+                        <div class="col text-right">
+                            <a href="{{ route('user.create') }}" class="btn btn-success">Tambah User</a>
+
+                        </div>
                 </div>
                 <div class="card-body">
                     @if (session()->has('pesan-berhasil'))
@@ -32,35 +35,36 @@
 
                     @endif
                     <div class="table-responsive">
-                        <table class="table table-hover text-center table-flush table-striped display nowrap" id="stock-keluar"
+                        <table class="table table-hover text-center table-flush table-striped display nowrap" id="table-user"
                             style="width:100%">
                             <thead>
                                 <th>No</th>
-                                <th>Kode Barang</th>
-                                <th>Nama Barang</th>
-                                <th>Tanggal Keluar</th>
-                                <th>Jumlah</th>
-                                <th>Penerima</th>
+                                <th>Username</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Gambar</th>
+                                <th>Terakhir Login</th>
                                 <th>Aksi</th>
                             </thead>
                             <tbody>
-                                @foreach ($stockout as $row)
+                                @foreach ($user as $row)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $row['kode_brg'] }}</td>
-                                        <td>{{ $row['nama_brg'] }}</td>
-                                        <td>{{ date('d-m-Y', strtotime($row['tangal_keluar'])) }}</td>
-                                        <td>{{ $row['jumlah'] }}</td>
-                                        <td>{{ $row['penerima'] }}</td>
+                                        <td>{{ $row['username'] }}</td>
+                                        <td>{{ $row['nama'] }}</td>
+                                        <td>{{ $row['email'] }}</td>
+                                        <td><img src="{{ asset('assets/admin') }}/img/profil/{{ $row['gambar'] }}"
+                                            alt="User Gambar" class="img-fluid"></td>
+                                        <td>{{ date('d/m/Y G:i', strtotime($row['login_time'])) }}</td>
                                         <td>
-                                            <form action="{{ route('stockout.destroy', ['stockout' => $row['id']]) }}"
+                                            <form action="{{ route('user.destroy', ['id' => $row['id']]) }}"
                                                 method="POST" class="d-inline">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit" class="btn btn-secondary btn-sm text-danger"><i class="ni ni-fat-remove fa-2x"></i></button>
                                             </form>
                                             |
-                                            <a href="{{ route('stockout.show', ['stockout'=>$row['id']]) }}" class="btn btn-secondary btn-sm text-info"><i class="fas fa-eye fa-2x"></i></a>
+                                            <a href="{{ route('user.edit', ['id'=>$row['id']]) }}" class="btn btn-secondary btn-sm text-warning"><i class="fas fa-edit fa-2x"></i></a>
 
                                         </td>
                                     </tr>

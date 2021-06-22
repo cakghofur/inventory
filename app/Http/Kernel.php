@@ -63,5 +63,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'cek-admin'=>\App\Http\Middleware\cekAdmin::class,
+        'cek-login'=>\App\Http\Middleware\cekLogin::class,
+        'cek-role'=>\App\Http\Middleware\cekRole::class,
     ];
 }

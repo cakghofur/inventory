@@ -95,6 +95,22 @@ class StockInController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\StockOut  $stockOut
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $data=[
+            'title'=>'Detail Barang Masuk',
+            'var'=>'stockin',
+            'row'=>StockIn::where('id',$id)->first()
+        ];
+        return view('stockin.show',$data);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\StockIn  $stockIn

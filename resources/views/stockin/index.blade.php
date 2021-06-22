@@ -41,8 +41,6 @@
                                 <th>Nama Barang</th>
                                 <th>Tanggal Masuk</th>
                                 <th>Jumlah</th>
-                                <th>Gambar</th>
-                                <th>Keterangan</th>
                                 <th>Aksi</th>
                             </thead>
                             <tbody>
@@ -53,9 +51,6 @@
                                         <td>{{ $row['nama_brg'] }}</td>
                                         <td>{{ date('d-m-Y', strtotime($row['tanggal_masuk'])) }}</td>
                                         <td>{{ $row['jumlah'] }}</td>
-                                        <td><img src="{{ asset('assets/gambar') }}/stockIn/{{ $row['gambar'] }}"
-                                                alt="StockIn Gambar"></td>
-                                        <td>{{ $row['keterangan'] }}</td>
                                         <td>
                                             <form action="{{ route('stockin.destroy', ['stockin' => $row['id']]) }}"
                                                 method="POST" class="d-inline">
@@ -64,7 +59,9 @@
                                                 <button type="submit" class="btn btn-secondary btn-sm text-danger"><i class="ni ni-fat-remove fa-2x"></i></button>
                                             </form>
                                             |
-                                            <a href="{{ route('stockin.edit', ['stockin'=>$row['id']]) }}" class="btn btn-secondary btn-sm text-warning"><i class="fas fa-edit fa-2x"></i></a>
+                                            <a href="{{ route('stockin.edit', ['stockin'=>$row['id']]) }}" class="btn btn-secondary btn-sm text-warning"><i class="fas fa-edit fa-2x"></i></a>|
+                                            <a href="{{ route('stockin.show', ['stockin'=>$row['id']]) }}" class="btn btn-secondary btn-sm text-info"><i class="fas fa-eye fa-2x"></i></a>|
+                                            <a href="{{ route('stockout.process', ['stockout'=>$row['id']]) }}" class="btn  btn-sm  {{ $row['jumlah'] == 0 ? 'btn-dark disabled' : 'btn-success' }}">Process</a>
 
                                         </td>
                                     </tr>
